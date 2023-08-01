@@ -1,0 +1,19 @@
+name: build-github-actions # Github Actions名称
+on: [push] # 触发条件:push事件触发
+jobs: # 任务
+  build-and-deploy:
+    runs-on: ubuntu-latest # 运行环境
+    steps: # 命令
+      - name: checkout # action
+        uses: actions/checkout@v3 # action
+
+      - name: build # action
+        run: |
+          npm install
+          npm run build
+
+      - name: deploy # action
+        uses: actions/setup-node@v1
+        width:
+          branch: gh-pages
+          folder: dist
